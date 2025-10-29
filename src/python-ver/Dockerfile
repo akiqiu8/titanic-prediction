@@ -18,5 +18,5 @@ CMD ["python", "main.py"]
 
 
 # Under titanic-prediction directory, download Kaggle datasets in data file, build and run the Docker container:
-# docker build -t titanic-pred-python  ./src/prediction/python-ver
+# docker build -t titanic-pred-python  ./src/python-ver
 # docker run --rm -v "$(pwd)/src/data:/python-app/data" titanic-pred-python
