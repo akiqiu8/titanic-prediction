@@ -2,8 +2,9 @@
 
 This project builds logistic regression models in both **Python** and **R** to predict passenger survival on the Titanic using the [Kaggle dataset](https://www.kaggle.com/competitions/titanic/data).  
 
-Both implementations are fully containerized using **Docker**, so you can reproduce results in any environment.
+Both implementations are fully containerized using Docker, so you can reproduce results in any environment.
 
+Before running this project, please ensure **[Docker](https://www.docker.com/products/docker-desktop/)** and **[Git](https://github.com/git-guides/install-git)** are installed and set up on your machine.
 
 ## Project Setup
 #### 1. Clone the repository
@@ -15,9 +16,8 @@ git clone https://github.com/akiqiu8/titanic-prediction.git
 Go to the [Titanic Kaggle website](https://www.kaggle.com/competitions/titanic/data) and download the following files:
 - ```train.csv```
 - ```test.csv```
-- ```gender_submission.csv```
 
-Then create a new folder named ```data/``` under ```src/``` and place all three files inside.
+Then create a new folder named ```data/``` under ```src/``` and place both files inside.
 
 Your project structure should look like this:
 
@@ -27,7 +27,6 @@ titanic-prediction/
 │   ├── data/
 │   │   ├── train.csv
 │   │   ├── test.csv
-│   │   └── gender_submission.csv
 │   ├── python-ver/
 │   │   ├── Dockerfile
 │   │   └── main.py
@@ -59,4 +58,4 @@ This will:
 - Install required packages
 - Mount the ```data/``` folder into the container
 - Train and evaluate the logistic regression model
-- **Print training and test accuracy directly in the terminal output**
+- **Produce test predictions** named ```"python_test_predictions.csv"``` and ```"R_test_predictions.csv"``` (where you can find under ```data/``` folder)
