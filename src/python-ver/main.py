@@ -73,7 +73,6 @@ def main():
     # Load test.csv & predict
     print("\n=== Predicting on the actual Titanic test.csv ===")
     test = pd.read_csv("data/test.csv")
-    test_result = pd.read_csv("data/gender_submission.csv")['Survived']
     print(f"Loaded test.csv with shape: {test.shape}")
 
     test.drop(columns=['Cabin'], inplace=True, errors='ignore')
@@ -83,8 +82,12 @@ def main():
 
     X_test_final = test[numeric_features + categorical_features]
     test_preds = best_model.predict(X_test_final)
-
-    print("Accuracy:", sum(test_preds==test_result)/len(test_result))
+    pred_df = pd.DataFrame({
+        'PassengerId': test['PassengerId'],
+        'Survived': test_preds
+    }).set_index('PassengerId')
+    pred_df.to_csv("data/python_test_predictions.csv")
+    print("Predictions saved to 'src/data/python_test_predictions.csv'")
 
 
 if __name__ == "__main__":
