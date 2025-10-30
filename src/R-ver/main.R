@@ -43,7 +43,6 @@ cat("Accuracy:", round(acc, 4), "\n")
 cat("\n=== Predicting on actual test.csv ===\n")
 
 test <- read.csv("data/test.csv", stringsAsFactors = FALSE)
-test_result <- read.csv("data/gender_submission.csv")$Survived
 cat("Loaded test.csv with shape:", dim(test), "\n")
 
 # Clean and feature engineer test data
@@ -62,5 +61,14 @@ test <- test %>%
 # Predict
 test_pred_prob <- predict(model, newdata = test, type = "response")
 test_pred <- ifelse(test_pred_prob > 0.5, 1, 0)
-test_acc <- mean(as.numeric(test_pred == test_result))
-cat("Accuracy on test.csv:", test_acc, "\n")
+
+
+# Combine PassengerId and predictions into a data frame
+pred_df <- data.frame(
+  PassengerId = test$PassengerId,
+  Survived = test_pred
+)
+
+# Save predictions to CSV
+write.csv(pred_df, "data/R_test_predictions.csv",row.names = FALSE)
+cat("Predictions saved to 'src/data/R_test_predictions.csv'\n")
